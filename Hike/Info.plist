@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This app uses the camera to add a photo to your diary entry.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app uses the Photo Library to add a photo to your diary entry.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
