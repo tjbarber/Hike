@@ -12,6 +12,7 @@ import CoreData
 class EntryStore {
     static let sharedInstance = EntryStore()
     let dataStoreContainer = DataStore.sharedInstance.persistantContainer
+    let viewContext = DataStore.sharedInstance.persistantContainer.viewContext
     
     func all(completion: @escaping ([Entry]?, Error?) -> Void) {
         let fetchRequest: NSFetchRequest<Entry> = Entry.fetchRequest()
@@ -19,15 +20,18 @@ class EntryStore {
         
         fetchRequest.sortDescriptors = [sortByDateCreated]
         
-        let viewContext = dataStoreContainer.viewContext
-        
-        viewContext.perform {
+        viewContext.perform { [unowned self] in
             do {
-                let allEntries = try viewContext.fetch(fetchRequest)
+                let allEntries = try self.viewContext.fetch(fetchRequest)
                 completion(allEntries, nil)
             } catch (let description) {
                 print("\(description)")
             }
+        }
+    }
+    
+    func insert(_ entry: Entry, completion: @escaping () -> Void) {
+        viewContext.perform {
         }
     }
 }

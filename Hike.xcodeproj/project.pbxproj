@@ -11,9 +11,9 @@
 		AC2ED1BC1F4B60FE00DFA6A6 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1BB1F4B60FE00DFA6A6 /* DataStore.swift */; };
 		AC2ED1C11F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1BF1F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift */; };
 		AC2ED1C41F4B644900DFA6A6 /* EntryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1C31F4B644900DFA6A6 /* EntryStore.swift */; };
-		AC2ED1C81F4B65B500DFA6A6 /* Entry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1C71F4B65B500DFA6A6 /* Entry+CoreDataProperties.swift */; };
 		AC2ED1CA1F4B849A00DFA6A6 /* EntryDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1C91F4B849A00DFA6A6 /* EntryDetailController.swift */; };
 		AC2ED1CD1F4BA32B00DFA6A6 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1CC1F4BA32B00DFA6A6 /* AlertHelper.swift */; };
+		AC2ED1D11F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1D01F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift */; };
 		ACF955991F4B456700B00F80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF955981F4B456700B00F80 /* AppDelegate.swift */; };
 		ACF9559B1F4B456700B00F80 /* EntriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF9559A1F4B456700B00F80 /* EntriesController.swift */; };
 		ACF9559E1F4B456700B00F80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACF9559C1F4B456700B00F80 /* Main.storyboard */; };
@@ -37,9 +37,9 @@
 		AC2ED1BB1F4B60FE00DFA6A6 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		AC2ED1BF1F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Entry+CoreDataClass.swift"; path = "Models/Entry+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AC2ED1C31F4B644900DFA6A6 /* EntryStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryStore.swift; path = "Data Sources/EntryStore.swift"; sourceTree = "<group>"; };
-		AC2ED1C71F4B65B500DFA6A6 /* Entry+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Entry+CoreDataProperties.swift"; path = "Models/Entry+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC2ED1C91F4B849A00DFA6A6 /* EntryDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryDetailController.swift; path = Controllers/EntryDetailController.swift; sourceTree = "<group>"; };
 		AC2ED1CC1F4BA32B00DFA6A6 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertHelper.swift; path = Helpers/AlertHelper.swift; sourceTree = "<group>"; };
+		AC2ED1D01F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Entry+CoreDataProperties.swift"; path = "Models/Entry+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		ACF955951F4B456700B00F80 /* Hike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF955981F4B456700B00F80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF9559A1F4B456700B00F80 /* EntriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EntriesController.swift; path = Controllers/EntriesController.swift; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				AC2ED1BF1F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift */,
-				AC2ED1C71F4B65B500DFA6A6 /* Entry+CoreDataProperties.swift */,
+				AC2ED1D01F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -263,12 +263,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF9559B1F4B456700B00F80 /* EntriesController.swift in Sources */,
-				AC2ED1C81F4B65B500DFA6A6 /* Entry+CoreDataProperties.swift in Sources */,
 				AC2ED1BC1F4B60FE00DFA6A6 /* DataStore.swift in Sources */,
 				ACF955991F4B456700B00F80 /* AppDelegate.swift in Sources */,
 				AC2ED1C11F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift in Sources */,
 				AC2ED1C41F4B644900DFA6A6 /* EntryStore.swift in Sources */,
 				AC2ED1CD1F4BA32B00DFA6A6 /* AlertHelper.swift in Sources */,
+				AC2ED1D11F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift in Sources */,
 				AC2ED1BA1F4B60D600DFA6A6 /* Hike.xcdatamodeld in Sources */,
 				AC2ED1CA1F4B849A00DFA6A6 /* EntryDetailController.swift in Sources */,
 			);

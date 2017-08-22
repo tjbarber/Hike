@@ -27,7 +27,7 @@ class EntryDetailController: UITableViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UITextField!
-    @IBOutlet weak var entry: UITextField!
+    @IBOutlet weak var entryTextField: UITextField!
     
     @IBAction func dismissKeyboard(_ sender: Any) {
         tableView.endEditing(true)
@@ -45,6 +45,23 @@ class EntryDetailController: UITableViewController {
         }
         
         self.present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    @IBAction func save(_ sender: Any) {
+        // FIXME: Currently only supports adding new, not updating
+        let entry = Entry(context: EntryStore.sharedInstance.viewContext)
+        
+        guard let name = titleLabel.text else {
+            AlertHelper.showAlert(withMessage: "You must give your entry a name!", presentingViewController: self)
+            return
+        }
+        
+        entry.name = name
+        entry.text = entryTextField.text
+        
+        EntryStore.sharedInstance.insert(entry) {
+            
+        }
     }
 }
 

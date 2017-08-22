@@ -191,10 +191,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Entry" id="7kE-Hz-FmB">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Rro-uR-dzH"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Rro-uR-dzH">
+                            <connections>
+                                <action selector="save:" destination="t9c-zM-rex" id="Jia-6G-uv4"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="entry" destination="mMY-yP-aD9" id="GrL-aq-U0s"/>
+                        <outlet property="entryTextField" destination="mMY-yP-aD9" id="fKM-Ir-YLq"/>
                         <outlet property="imageView" destination="opX-cO-bM9" id="V4Z-R4-AE4"/>
                         <outlet property="titleLabel" destination="fh8-FM-gxq" id="1t2-t1-8Pi"/>
                     </connections>

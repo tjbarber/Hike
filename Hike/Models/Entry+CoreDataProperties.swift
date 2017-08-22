@@ -2,7 +2,7 @@
 //  Entry+CoreDataProperties.swift
 //  Hike
 //
-//  Created by TJ Barber on 8/21/17.
+//  Created by TJ Barber on 8/22/17.
 //  Copyright © 2017 Novel. All rights reserved.
 //
 
@@ -23,5 +23,6 @@ extension Entry {
     @NSManaged public var location: String?
     @NSManaged public var createdAt: NSDate?
     @NSManaged public var updatedAt: NSDate?
+    @NSManaged public var image: NSData?
 
 }
