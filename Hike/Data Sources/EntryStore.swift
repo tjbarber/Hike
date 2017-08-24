@@ -16,7 +16,7 @@ class EntryStore {
     
     func all(completion: @escaping ([Entry]?, Error?) -> Void) {
         let fetchRequest: NSFetchRequest<Entry> = Entry.fetchRequest()
-        let sortByDateCreated = NSSortDescriptor(key: #keyPath(Entry.createdAt), ascending: true)
+        let sortByDateCreated = NSSortDescriptor(key: #keyPath(Entry.createdAt), ascending: false)
         
         fetchRequest.sortDescriptors = [sortByDateCreated]
         
@@ -30,8 +30,24 @@ class EntryStore {
         }
     }
     
-    func insert(_ entry: Entry, completion: @escaping () -> Void) {
+    func insert(_ entry: Entry, completion: @escaping (Error?) -> Void) {
         viewContext.perform {
+            if entry.createdAt == nil {
+                entry.createdAt = Date() as NSDate
+            }
+            
+            entry.updatedAt = Date() as NSDate
+            
+            do {
+                try self.viewContext.save()
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            } catch (let e) {
+                DispatchQueue.main.async {
+                    completion(e)
+                }
+            }
         }
     }
 }

@@ -12,6 +12,8 @@ import Photos
 
 class EntryDetailController: UITableViewController {
     
+    var entryImage: UIImage?
+    
     lazy var imagePickerController: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -51,6 +53,7 @@ class EntryDetailController: UITableViewController {
         // FIXME: Currently only supports adding new, not updating
         let entry = Entry(context: EntryStore.sharedInstance.viewContext)
         
+        // FIXME: You have to have either a text entry or image
         guard let name = titleLabel.text else {
             AlertHelper.showAlert(withMessage: "You must give your entry a name!", presentingViewController: self)
             return
@@ -59,8 +62,19 @@ class EntryDetailController: UITableViewController {
         entry.name = name
         entry.text = entryTextField.text
         
-        EntryStore.sharedInstance.insert(entry) {
+        if let image = self.entryImage {
+            if let imageData = UIImageJPEGRepresentation(image, 0.6) {
+                entry.image = imageData as NSData
+            }
+        }
+        
+        EntryStore.sharedInstance.insert(entry) { error in
+            if let error = error {
+                AlertHelper.showAlert(withMessage: error.localizedDescription, presentingViewController: self)
+            }
             
+            // We saved!
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }
@@ -93,7 +107,14 @@ extension EntryDetailController {
 extension EntryDetailController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        imageView.image = image
+        if let scaledImage = image.scaleImageTo(newSize: CGSize(width: (image.size.width / 4), height: (image.size.height) / 4)) {
+            self.entryImage = scaledImage
+        } else {
+            // Couldn't resize image for some reason...
+            self.entryImage = image
+        }
+        
+        imageView.image = self.entryImage
         dismiss(animated: true, completion: nil)
     }
 }

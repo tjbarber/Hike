@@ -11,13 +11,17 @@ import UIKit
 class EntriesController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noEntriesView: UIView!
     
-    var entries: [Entry]?
+    var entries = [Entry]()
+    lazy var entryImageQueue = OperationQueue()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureTableViewDataSource()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         loadAllEntries()
     }
 
@@ -34,13 +38,26 @@ extension EntriesController: UITableViewDataSource {
         self.tableView.dataSource = self
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.entries.count
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "entryCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: EntryCell.identifier, for: indexPath) as! EntryCell
+        cell.configure(withEntry: self.entries[indexPath.row], operationQueue: entryImageQueue)
         return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension EntriesController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 420.0
     }
 }
 
@@ -50,8 +67,8 @@ extension EntriesController {
     func loadAllEntries() {
         EntryStore.sharedInstance.all { [unowned self] entries, error in
             if let error = error {
-                // FIXME: HANDLE ERROR
-                print("\(error)")
+                // If we can't load the data at this point, we might as well crash.
+                fatalError("\(error.localizedDescription)")
             }
             
             guard let entries = entries else {
@@ -61,22 +78,24 @@ extension EntriesController {
             self.entries = entries
             
             DispatchQueue.main.async {
-                self.refreshDisplayIfNoEntries()
+                self.refreshDisplay()
             }
         }
     }
     
-    func refreshDisplayIfNoEntries() {
-        if let entries = self.entries {
-            
-            if entries.isEmpty {
-                self.tableView.isHidden = true
-                self.tableView.isUserInteractionEnabled = false
-            } else {
-                self.tableView.isHidden = false
-                self.tableView.isUserInteractionEnabled = true
-                self.tableView.reloadData()
-            }
+    func refreshDisplay() {
+        if entries.isEmpty {
+            self.tableView.isHidden = true
+            self.tableView.isUserInteractionEnabled = false
+            self.noEntriesView.isHidden = false
+            self.noEntriesView.isUserInteractionEnabled = true
+        } else {
+            self.tableView.isHidden = false
+            self.tableView.isUserInteractionEnabled = true
+            self.noEntriesView.isHidden = true
+            self.noEntriesView.isUserInteractionEnabled = false
+            self.tableView.reloadData()
         }
+        
     }
 }

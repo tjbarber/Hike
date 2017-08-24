@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC0EB8C41F4CDE2F003268E5 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0EB8C31F4CDE2F003268E5 /* ImageHelper.swift */; };
+		AC0EB8C81F4E347C003268E5 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0EB8C71F4E347C003268E5 /* UIKitExtensions.swift */; };
 		AC2ED1BA1F4B60D600DFA6A6 /* Hike.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1B81F4B60D600DFA6A6 /* Hike.xcdatamodeld */; };
 		AC2ED1BC1F4B60FE00DFA6A6 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1BB1F4B60FE00DFA6A6 /* DataStore.swift */; };
 		AC2ED1C11F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1BF1F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift */; };
@@ -14,6 +16,7 @@
 		AC2ED1CA1F4B849A00DFA6A6 /* EntryDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1C91F4B849A00DFA6A6 /* EntryDetailController.swift */; };
 		AC2ED1CD1F4BA32B00DFA6A6 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1CC1F4BA32B00DFA6A6 /* AlertHelper.swift */; };
 		AC2ED1D11F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1D01F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift */; };
+		AC5F481C1F4C9563005CD9C8 /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5F481B1F4C9563005CD9C8 /* EntryCell.swift */; };
 		ACF955991F4B456700B00F80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF955981F4B456700B00F80 /* AppDelegate.swift */; };
 		ACF9559B1F4B456700B00F80 /* EntriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF9559A1F4B456700B00F80 /* EntriesController.swift */; };
 		ACF9559E1F4B456700B00F80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACF9559C1F4B456700B00F80 /* Main.storyboard */; };
@@ -33,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC0EB8C31F4CDE2F003268E5 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageHelper.swift; path = Helpers/ImageHelper.swift; sourceTree = "<group>"; };
+		AC0EB8C71F4E347C003268E5 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIKitExtensions.swift; path = Helpers/UIKitExtensions.swift; sourceTree = "<group>"; };
 		AC2ED1B91F4B60D600DFA6A6 /* Hike.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hike.xcdatamodel; sourceTree = "<group>"; };
 		AC2ED1BB1F4B60FE00DFA6A6 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		AC2ED1BF1F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Entry+CoreDataClass.swift"; path = "Models/Entry+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -40,6 +45,7 @@
 		AC2ED1C91F4B849A00DFA6A6 /* EntryDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryDetailController.swift; path = Controllers/EntryDetailController.swift; sourceTree = "<group>"; };
 		AC2ED1CC1F4BA32B00DFA6A6 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertHelper.swift; path = Helpers/AlertHelper.swift; sourceTree = "<group>"; };
 		AC2ED1D01F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Entry+CoreDataProperties.swift"; path = "Models/Entry+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AC5F481B1F4C9563005CD9C8 /* EntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryCell.swift; path = Views/EntryCell.swift; sourceTree = "<group>"; };
 		ACF955951F4B456700B00F80 /* Hike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF955981F4B456700B00F80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF9559A1F4B456700B00F80 /* EntriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EntriesController.swift; path = Controllers/EntriesController.swift; sourceTree = "<group>"; };
@@ -74,6 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				AC2ED1CC1F4BA32B00DFA6A6 /* AlertHelper.swift */,
+				AC0EB8C31F4CDE2F003268E5 /* ImageHelper.swift */,
+				AC0EB8C71F4E347C003268E5 /* UIKitExtensions.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -102,7 +110,7 @@
 				ACF955B91F4B5FAF00B00F80 /* Models */,
 				ACF955BB1F4B5FCA00B00F80 /* Views */,
 				ACF955B81F4B5FA900B00F80 /* Controllers */,
-				ACF955BA1F4B5FB400B00F80 /* Data Sources */,
+				ACF955BA1F4B5FB400B00F80 /* Data Stores */,
 				AC2ED1CB1F4BA30300DFA6A6 /* Helpers */,
 				ACF955981F4B456700B00F80 /* AppDelegate.swift */,
 				ACF9559C1F4B456700B00F80 /* Main.storyboard */,
@@ -142,17 +150,18 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		ACF955BA1F4B5FB400B00F80 /* Data Sources */ = {
+		ACF955BA1F4B5FB400B00F80 /* Data Stores */ = {
 			isa = PBXGroup;
 			children = (
 				AC2ED1C31F4B644900DFA6A6 /* EntryStore.swift */,
 			);
-			name = "Data Sources";
+			name = "Data Stores";
 			sourceTree = "<group>";
 		};
 		ACF955BB1F4B5FCA00B00F80 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AC5F481B1F4C9563005CD9C8 /* EntryCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -264,13 +273,16 @@
 			files = (
 				ACF9559B1F4B456700B00F80 /* EntriesController.swift in Sources */,
 				AC2ED1BC1F4B60FE00DFA6A6 /* DataStore.swift in Sources */,
+				AC0EB8C81F4E347C003268E5 /* UIKitExtensions.swift in Sources */,
 				ACF955991F4B456700B00F80 /* AppDelegate.swift in Sources */,
 				AC2ED1C11F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift in Sources */,
 				AC2ED1C41F4B644900DFA6A6 /* EntryStore.swift in Sources */,
 				AC2ED1CD1F4BA32B00DFA6A6 /* AlertHelper.swift in Sources */,
+				AC5F481C1F4C9563005CD9C8 /* EntryCell.swift in Sources */,
 				AC2ED1D11F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift in Sources */,
 				AC2ED1BA1F4B60D600DFA6A6 /* Hike.xcdatamodeld in Sources */,
 				AC2ED1CA1F4B849A00DFA6A6 /* EntryDetailController.swift in Sources */,
+				AC0EB8C41F4CDE2F003268E5 /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
