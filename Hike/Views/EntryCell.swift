@@ -24,6 +24,7 @@ class EntryCell: UITableViewCell {
     @IBOutlet weak var entryTitle: UILabel!
     @IBOutlet weak var entryText: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var lastUpdatedDateLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     
     override func awakeFromNib() {
@@ -43,6 +44,7 @@ class EntryCell: UITableViewCell {
         self.entryText.text = nil
         self.entryTitle.text = nil
         self.dateLabel.text = nil
+        self.lastUpdatedDateLabel.text = nil
         self.locationLabel.text = nil
         self.locationLabel.isHidden = true
     }
@@ -64,6 +66,12 @@ class EntryCell: UITableViewCell {
         if let createdAt = entry.createdAt {
             self.dateLabel.text = dateFormatter.string(from: createdAt as Date)
             
+        }
+        
+        if let updatedAt = entry.updatedAt {
+            let lastUpdatedDateString = dateFormatter.string(from: updatedAt as Date)
+            
+            self.lastUpdatedDateLabel.text = "Last updated on \(lastUpdatedDateString)"
         }
         
         if let location = entry.location {

@@ -92,7 +92,7 @@ extension EntriesController: UITableViewDataSource {
 
 extension EntriesController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 450.0
+        return 460.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
