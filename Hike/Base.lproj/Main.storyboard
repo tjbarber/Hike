@@ -163,24 +163,6 @@
             </objects>
             <point key="canvasLocation" x="1029.5999999999999" y="163.26836581709148"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="FfV-PU-fjN">
-            <objects>
-                <viewController id="PbD-2W-jpm" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="UAZ-Du-VqV"/>
-                        <viewControllerLayoutGuide type="bottom" id="iEk-oa-Fs2"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="gYp-RL-R0q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="npK-f5-Won" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2083" y="564"/>
-        </scene>
         <!--Add Entry-->
         <scene sceneID="10d-nJ-5rU">
             <objects>
@@ -311,17 +293,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Entry" id="7kE-Hz-FmB">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Rro-uR-dzH">
-                            <connections>
-                                <action selector="save:" destination="t9c-zM-rex" id="Jia-6G-uv4"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="Rro-uR-dzH"/>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
+                        <outlet property="actionBarButtonItem" destination="Rro-uR-dzH" id="dLM-MI-MCF"/>
                         <outlet property="entryTextField" destination="Neg-dm-LYs" id="6O5-LD-zmF"/>
                         <outlet property="imageView" destination="opX-cO-bM9" id="V4Z-R4-AE4"/>
+                        <outlet property="imageViewGestureRecognizer" destination="DxD-Xs-5BU" id="gv1-JR-kGA"/>
                         <outlet property="locationActivityIndicator" destination="H1z-nI-GUO" id="RLA-fn-F1M"/>
                         <outlet property="locationLabel" destination="P3o-g5-gaN" id="xtf-GM-WOV"/>
                         <outlet property="titleLabel" destination="fh8-FM-gxq" id="1t2-t1-8Pi"/>
@@ -344,7 +324,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2083" y="-505"/>
+            <point key="canvasLocation" x="2007" y="164"/>
         </scene>
     </scenes>
     <resources>

@@ -40,6 +40,7 @@ class EntriesController: UIViewController {
                 if let entry = self.selectedEntry {
                     destination.entryStatus = .updating
                     destination.entry = entry
+                    destination.entryStatus = .viewing
                 }
             default: return
             }

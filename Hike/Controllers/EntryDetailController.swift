@@ -11,6 +11,7 @@ import AVFoundation
 import Photos
 
 enum EntryStatus {
+    case viewing
     case updating
     case inserting
 }
@@ -49,6 +50,8 @@ class EntryDetailController: UITableViewController {
     @IBOutlet weak var entryTextField: UITextView!
     @IBOutlet weak var locationActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var actionBarButtonItem: UIBarButtonItem!
+    @IBOutlet var imageViewGestureRecognizer: UITapGestureRecognizer!
     
     @IBAction func dismissKeyboard(_ sender: Any) {
         tableView.endEditing(true)
@@ -77,7 +80,7 @@ class EntryDetailController: UITableViewController {
         }
     }
 
-    @IBAction func save(_ sender: Any) {
+    func save() {
         if self.entry == nil {
             self.entry = Entry(context: EntryStore.sharedInstance.viewContext)
         }
@@ -118,6 +121,8 @@ class EntryDetailController: UITableViewController {
                     dataError = error
                 }
             }
+        case .viewing:
+            fatalError("You're viewing, you're not supposed to be here.")
         }
         
         if let dataError = dataError {
@@ -146,6 +151,13 @@ class EntryDetailController: UITableViewController {
             self.entryTextField.text = entry.text
         }
         
+        if self.entryStatus == .viewing {
+            self.setMode(editing: false)
+        }
+        
+        self.actionBarButtonItem.target = self
+        self.actionBarButtonItem.action = #selector(actionButtonPressed(_:))
+        
         self.locationManager.manager.delegate = self
     }
     
@@ -156,6 +168,40 @@ class EntryDetailController: UITableViewController {
 
 extension EntryDetailController: UINavigationControllerDelegate {
     
+}
+
+// MARK: - Helper methods
+extension EntryDetailController {
+    func actionButtonPressed(_ sender: UIBarButtonItem) {
+        switch self.entryStatus {
+        case .inserting, .updating: save()
+        case .viewing:
+            self.entryStatus = .updating
+            setMode(editing: true)
+        }
+    }
+    
+    func setMode(editing editable: Bool) {
+        if !editable {
+            self.actionBarButtonItem.title = "Edit"
+            
+            if self.entryLocationStatus != .set {
+                self.locationLabel.text = "Location not provided"
+            }
+        } else {
+            self.actionBarButtonItem.title = "Save"
+            
+            if self.entryLocationStatus != .set {
+                self.locationLabel.text = "Tap to add location"
+            }
+        }
+        
+        self.titleLabel.isUserInteractionEnabled = editable
+        self.entryTextField.isEditable = editable
+        // use tap gesture recognizer here
+        self.imageViewGestureRecognizer.isEnabled = editable
+        self.locationLabel.isUserInteractionEnabled = editable
+    }
 }
 
 // MARK: - Camera Helper Methods
