@@ -208,7 +208,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to add location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P3o-g5-gaN">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location services not available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P3o-g5-gaN">
                                                     <rect key="frame" x="16" y="8" width="382" height="27.666666666666664"/>
                                                     <gestureRecognizers/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -304,6 +304,7 @@
                         <outlet property="imageViewGestureRecognizer" destination="DxD-Xs-5BU" id="gv1-JR-kGA"/>
                         <outlet property="locationActivityIndicator" destination="H1z-nI-GUO" id="RLA-fn-F1M"/>
                         <outlet property="locationLabel" destination="P3o-g5-gaN" id="xtf-GM-WOV"/>
+                        <outlet property="locationLabelGestureRecognizer" destination="mdI-gl-C32" id="LYB-1x-nbx"/>
                         <outlet property="titleLabel" destination="fh8-FM-gxq" id="1t2-t1-8Pi"/>
                     </connections>
                 </tableViewController>
@@ -318,7 +319,7 @@
                         <action selector="takePicture:" destination="t9c-zM-rex" id="g2A-NV-1Yj"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="mdI-gl-C32">
+                <tapGestureRecognizer enabled="NO" id="mdI-gl-C32">
                     <connections>
                         <action selector="addLocation:" destination="t9c-zM-rex" id="YFI-fl-hwd"/>
                     </connections>

@@ -22,7 +22,7 @@ enum EntryLocationStatus {
     case set
 }
 
-class EntryDetailController: UITableViewController {
+class EntryDetailController: UITableViewController, UINavigationControllerDelegate {
     
     var entryStatus: EntryStatus = .inserting
     var entryLocationStatus: EntryLocationStatus = .notDetermined
@@ -52,6 +52,7 @@ class EntryDetailController: UITableViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var actionBarButtonItem: UIBarButtonItem!
     @IBOutlet var imageViewGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet var locationLabelGestureRecognizer: UITapGestureRecognizer!
     
     @IBAction func dismissKeyboard(_ sender: Any) {
         tableView.endEditing(true)
@@ -79,7 +80,91 @@ class EntryDetailController: UITableViewController {
             self.locationManager.requestLocation()
         }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
+        self.determineLocationPermissionsAndUpdateView()
+        
+        if let entry = self.entry {
+            
+            if let imageData = entry.image {
+                self.imageView.image = UIImage(data: imageData as Data)
+            }
+            
+            if let location = entry.location {
+                self.entryLocationStatus = .set
+                self.locationLabel.text = location
+            }
+            
+            self.titleLabel.text = entry.name
+            self.entryTextField.text = entry.text
+        }
+        
+        if self.entryStatus == .viewing {
+            self.setMode(editing: false)
+        }
+        
+        self.actionBarButtonItem.target = self
+        self.actionBarButtonItem.action = #selector(actionButtonPressed(_:))
+        
+        self.locationManager.manager.delegate = self
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+}
+
+// MARK: - Helper methods
+extension EntryDetailController {
+    func actionButtonPressed(_ sender: UIBarButtonItem) {
+        switch self.entryStatus {
+        case .inserting, .updating: save()
+        case .viewing:
+            self.entryStatus = .updating
+            setMode(editing: true)
+        }
+    }
+    
+    func setMode(editing editable: Bool) {
+        if !editable {
+            self.actionBarButtonItem.title = "Edit"
+            
+            if self.entryLocationStatus != .set {
+                self.locationLabel.text = "Location not provided"
+            }
+        } else {
+            self.actionBarButtonItem.title = "Save"
+            if self.entryLocationStatus != .set {
+                determineLocationPermissionsAndUpdateView()
+            }
+        }
+        
+        self.titleLabel.isUserInteractionEnabled = editable
+        self.entryTextField.isEditable = editable
+        self.imageViewGestureRecognizer.isEnabled = editable
+    }
+    
+    func determineLocationPermissionsAndUpdateView() {
+        if self.entryStatus != .viewing {
+            let isLocationServicesAuthorized = self.locationManager.authorizationStatus == .authorizedAlways ||
+                self.locationManager.authorizationStatus == .authorizedWhenInUse
+            
+            self.locationLabel.isEnabled = isLocationServicesAuthorized
+            self.locationLabelGestureRecognizer.isEnabled = isLocationServicesAuthorized
+            
+            if self.entryLocationStatus != .set {
+                if isLocationServicesAuthorized {
+                    self.locationLabel.text = "Tap to add location"
+                } else {
+                    self.locationLabel.text = "Location services not avaliable"
+                }
+            }
+        }
+    }
+    
     func save() {
         if self.entry == nil {
             self.entry = Entry(context: EntryStore.sharedInstance.viewContext)
@@ -100,7 +185,7 @@ class EntryDetailController: UITableViewController {
             AlertHelper.showAlert(withMessage: "You must give your entry a title or content!", presentingViewController: self)
             return
         }
-    
+        
         if let image = self.entryImage {
             if let imageData = UIImageJPEGRepresentation(image, 0.6) {
                 entry.image = imageData as NSData
@@ -131,76 +216,6 @@ class EntryDetailController: UITableViewController {
         }
         
         self.navigationController?.popViewController(animated: true)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if let entry = self.entry {
-            
-            if let imageData = entry.image {
-                self.imageView.image = UIImage(data: imageData as Data)
-            }
-            
-            if let location = entry.location {
-                self.entryLocationStatus = .set
-                self.locationLabel.text = location
-            }
-            
-            self.titleLabel.text = entry.name
-            self.entryTextField.text = entry.text
-        }
-        
-        if self.entryStatus == .viewing {
-            self.setMode(editing: false)
-        }
-        
-        self.actionBarButtonItem.target = self
-        self.actionBarButtonItem.action = #selector(actionButtonPressed(_:))
-        
-        self.locationManager.manager.delegate = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-}
-
-extension EntryDetailController: UINavigationControllerDelegate {
-    
-}
-
-// MARK: - Helper methods
-extension EntryDetailController {
-    func actionButtonPressed(_ sender: UIBarButtonItem) {
-        switch self.entryStatus {
-        case .inserting, .updating: save()
-        case .viewing:
-            self.entryStatus = .updating
-            setMode(editing: true)
-        }
-    }
-    
-    func setMode(editing editable: Bool) {
-        if !editable {
-            self.actionBarButtonItem.title = "Edit"
-            
-            if self.entryLocationStatus != .set {
-                self.locationLabel.text = "Location not provided"
-            }
-        } else {
-            self.actionBarButtonItem.title = "Save"
-            
-            if self.entryLocationStatus != .set {
-                self.locationLabel.text = "Tap to add location"
-            }
-        }
-        
-        self.titleLabel.isUserInteractionEnabled = editable
-        self.entryTextField.isEditable = editable
-        // use tap gesture recognizer here
-        self.imageViewGestureRecognizer.isEnabled = editable
-        self.locationLabel.isUserInteractionEnabled = editable
     }
 }
 
@@ -260,6 +275,7 @@ extension EntryDetailController {
 extension EntryDetailController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         locationManager.authorizationStatus = status
+        self.determineLocationPermissionsAndUpdateView()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
