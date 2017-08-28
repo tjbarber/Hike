@@ -10,9 +10,16 @@ import UIKit
 import AVFoundation
 import Photos
 
+enum EntryStatus {
+    case updating
+    case inserting
+}
+
 class EntryDetailController: UITableViewController {
     
+    var entryStatus: EntryStatus = .inserting
     var entryImage: UIImage?
+    var entry: Entry?
     
     lazy var imagePickerController: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
@@ -29,7 +36,7 @@ class EntryDetailController: UITableViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UITextField!
-    @IBOutlet weak var entryTextField: UITextField!
+    @IBOutlet weak var entryTextField: UITextView!
     
     @IBAction func dismissKeyboard(_ sender: Any) {
         tableView.endEditing(true)
@@ -50,31 +57,60 @@ class EntryDetailController: UITableViewController {
     }
     
     @IBAction func save(_ sender: Any) {
-        // FIXME: Currently only supports adding new, not updating
-        let entry = Entry(context: EntryStore.sharedInstance.viewContext)
-        
-        // FIXME: You have to have either a text entry or image
-        guard let name = titleLabel.text else {
-            AlertHelper.showAlert(withMessage: "You must give your entry a name!", presentingViewController: self)
-            return
+        if self.entry == nil {
+            self.entry = Entry(context: EntryStore.sharedInstance.viewContext)
         }
         
-        entry.name = name
+        guard let entry = self.entry else {
+            fatalError("No entry object avaliable!")
+        }
+        
+        entry.name = titleLabel.text
         entry.text = entryTextField.text
         
+        if entry.name == nil && entry.text == nil {
+            AlertHelper.showAlert(withMessage: "You must give your entry a title or content!", presentingViewController: self)
+            return
+        }
+    
         if let image = self.entryImage {
             if let imageData = UIImageJPEGRepresentation(image, 0.6) {
                 entry.image = imageData as NSData
             }
         }
         
-        EntryStore.sharedInstance.insert(entry) { error in
-            if let error = error {
-                AlertHelper.showAlert(withMessage: error.localizedDescription, presentingViewController: self)
+        var dataError: Error?
+        switch self.entryStatus {
+        case .inserting:
+            self.insert(entry) { error in
+                if let error = error {
+                    dataError = error
+                }
             }
-            
-            // We saved!
-            self.navigationController?.popViewController(animated: true)
+        case .updating:
+            self.update(entry) { error in
+                if let error = error {
+                    dataError = error
+                }
+            }
+        }
+        
+        if let dataError = dataError {
+            AlertHelper.showAlert(withMessage: dataError.localizedDescription, presentingViewController: self)
+            return
+        }
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let entry = self.entry {
+            if let imageData = entry.image {
+                self.imageView.image = UIImage(data: imageData as Data)
+            }
+            self.titleLabel.text = entry.name
+            self.entryTextField.text = entry.text
         }
     }
 }
@@ -92,7 +128,7 @@ extension EntryDetailController {
             if (AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.denied) {
                 return false
             }
-                    case .photoLibrary, .savedPhotosAlbum:
+        case .photoLibrary, .savedPhotosAlbum:
             if (PHPhotoLibrary.authorizationStatus() == .restricted) {
                 return false
             }
@@ -116,5 +152,21 @@ extension EntryDetailController: UIImagePickerControllerDelegate {
         
         imageView.image = self.entryImage
         dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - Core Data Wrappers
+
+extension EntryDetailController {
+    func update(_ entry: Entry, completion: @escaping (Error?) -> Void) {
+        EntryStore.sharedInstance.update(entry) { error in
+            completion(error)
+        }
+    }
+    
+    func insert(_ entry: Entry, completion: @escaping (Error?) -> Void) {
+        EntryStore.sharedInstance.insert(entry) { error in
+            completion(error)
+        }
     }
 }

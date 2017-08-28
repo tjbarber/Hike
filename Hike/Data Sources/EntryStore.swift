@@ -50,4 +50,37 @@ class EntryStore {
             }
         }
     }
+    
+    func update(_ entry: Entry, completion: @escaping (Error?) -> Void) {
+        viewContext.perform {
+            entry.updatedAt = Date() as NSDate
+            
+            do {
+                try self.viewContext.save()
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            } catch (let e) {
+                DispatchQueue.main.async {
+                    completion(e)
+                }
+            }
+        }
+    }
+    
+    func delete(_ entry: Entry, completion: @escaping (Error?) -> Void) {
+        viewContext.perform {
+            self.viewContext.delete(entry)
+            do {
+                try self.viewContext.save()
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }   catch (let e) {
+                DispatchQueue.main.async {
+                    completion(e)
+                }
+            }
+        }
+    }
 }

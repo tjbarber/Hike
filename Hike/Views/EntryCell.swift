@@ -11,10 +11,20 @@ import UIKit
 class EntryCell: UITableViewCell {
     
     static let identifier = "\(EntryCell.self)"
+    lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        
+        formatter.locale = Locale(identifier: "en-US")
+        formatter.setLocalizedDateFormatFromTemplate("MMMM dd, yyyy")
+        
+        return formatter
+    }()
     
     @IBOutlet weak var entryImageView: UIImageView!
     @IBOutlet weak var entryTitle: UILabel!
     @IBOutlet weak var entryText: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,12 +37,17 @@ class EntryCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(withEntry entry: Entry, operationQueue: OperationQueue) {
-        // Clear everything in the cell
+    override func prepareForReuse() {
+        super.prepareForReuse()
         self.entryImageView.image = nil
         self.entryText.text = nil
         self.entryTitle.text = nil
-        
+        self.dateLabel.text = nil
+        self.locationLabel.text = nil
+        self.locationLabel.isHidden = true
+    }
+    
+    func configure(withEntry entry: Entry, operationQueue: OperationQueue) {
         // Assign new values
         if let imageData = entry.image {
             operationQueue.addOperation {
@@ -45,5 +60,16 @@ class EntryCell: UITableViewCell {
         
         self.entryTitle.text = entry.name
         self.entryText.text = entry.text
+        
+        if let createdAt = entry.createdAt {
+            self.dateLabel.text = dateFormatter.string(from: createdAt as Date)
+            
+        }
+        
+        if let location = entry.location {
+            self.locationLabel.text = location
+            self.locationLabel.isHidden = false
+        }
+        self.entryText.sizeToFit()
     }
 }

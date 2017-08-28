@@ -14,28 +14,45 @@ class EntriesController: UIViewController {
     @IBOutlet weak var noEntriesView: UIView!
     
     var entries = [Entry]()
+    var selectedEntry: Entry?
+    
     lazy var entryImageQueue = OperationQueue()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTableViewDataSource()
+        configureTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.selectedEntry = nil
         loadAllEntries()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "entryDetail":
+                let destination = segue.destination as! EntryDetailController
+                if let entry = self.selectedEntry {
+                    destination.entryStatus = .updating
+                    destination.entry = entry
+                }
+            default: return
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
 
 extension EntriesController: UITableViewDataSource {
-    func configureTableViewDataSource() {
+    func configureTableView() {
         self.tableView.dataSource = self
+        self.tableView.delegate   = self
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -51,13 +68,35 @@ extension EntriesController: UITableViewDataSource {
         cell.configure(withEntry: self.entries[indexPath.row], operationQueue: entryImageQueue)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            let entry = self.entries[indexPath.row]
+            EntryStore.sharedInstance.delete(entry) { error in
+                if let error = error {
+                    AlertHelper.showAlert(withMessage: error.localizedDescription, presentingViewController: self)
+                } else {
+                    self.entries.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    if (self.entries.isEmpty) {
+                        self.refreshDisplay()
+                    }
+                }
+            }
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
 
 extension EntriesController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 420.0
+        return 450.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedEntry = self.entries[indexPath.row]
+        self.performSegue(withIdentifier: "entryDetail", sender: nil)
     }
 }
 
