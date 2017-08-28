@@ -163,12 +163,30 @@
             </objects>
             <point key="canvasLocation" x="1029.5999999999999" y="163.26836581709148"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="FfV-PU-fjN">
+            <objects>
+                <viewController id="PbD-2W-jpm" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UAZ-Du-VqV"/>
+                        <viewControllerLayoutGuide type="bottom" id="iEk-oa-Fs2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gYp-RL-R0q">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="npK-f5-Won" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2083" y="564"/>
+        </scene>
         <!--Add Entry-->
         <scene sceneID="10d-nJ-5rU">
             <objects>
                 <tableViewController id="t9c-zM-rex" customClass="EntryDetailController" customModule="Hike" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="V3U-Qz-Kkd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -199,10 +217,46 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Location" id="zLh-EU-5kH">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="0bH-2D-Rjj">
+                                        <rect key="frame" x="0.0" y="331" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0bH-2D-Rjj" id="vck-99-Z1O">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to add location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P3o-g5-gaN">
+                                                    <rect key="frame" x="16" y="8" width="382" height="27.666666666666664"/>
+                                                    <gestureRecognizers/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="mdI-gl-C32" appends="YES" id="Bqs-DZ-rp5"/>
+                                                    </connections>
+                                                </label>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="H1z-nI-GUO">
+                                                    <rect key="frame" x="16" y="12" width="20" height="19"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="H1z-nI-GUO" secondAttribute="bottom" constant="4" id="SJx-6r-b3B"/>
+                                                <constraint firstItem="P3o-g5-gaN" firstAttribute="leading" secondItem="vck-99-Z1O" secondAttribute="leading" constant="16" id="TRT-CD-rBg"/>
+                                                <constraint firstAttribute="trailing" secondItem="P3o-g5-gaN" secondAttribute="trailing" constant="16" id="Xur-tF-OCo"/>
+                                                <constraint firstItem="H1z-nI-GUO" firstAttribute="top" secondItem="vck-99-Z1O" secondAttribute="topMargin" constant="4" id="qF0-14-XXp"/>
+                                                <constraint firstItem="H1z-nI-GUO" firstAttribute="leading" secondItem="vck-99-Z1O" secondAttribute="leadingMargin" constant="8" id="qFH-zH-lDm"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="P3o-g5-gaN" secondAttribute="bottom" id="scE-fJ-WZP"/>
+                                                <constraint firstItem="P3o-g5-gaN" firstAttribute="top" secondItem="vck-99-Z1O" secondAttribute="topMargin" id="tci-QT-79e"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Title" id="doH-nC-2OU">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="vTU-1g-HeY">
-                                        <rect key="frame" x="0.0" y="331" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="431" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vTU-1g-HeY" id="t3R-yO-4eZ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -228,7 +282,7 @@
                             <tableViewSection headerTitle="Entry" id="nQb-W4-dT9">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="200" id="Xcq-Jk-Ee4">
-                                        <rect key="frame" x="0.0" y="431" width="414" height="200"/>
+                                        <rect key="frame" x="0.0" y="531" width="414" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xcq-Jk-Ee4" id="kLY-DJ-cvz">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="199.5"/>
@@ -263,9 +317,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="1000"/>
                     <connections>
                         <outlet property="entryTextField" destination="Neg-dm-LYs" id="6O5-LD-zmF"/>
                         <outlet property="imageView" destination="opX-cO-bM9" id="V4Z-R4-AE4"/>
+                        <outlet property="locationActivityIndicator" destination="H1z-nI-GUO" id="RLA-fn-F1M"/>
+                        <outlet property="locationLabel" destination="P3o-g5-gaN" id="xtf-GM-WOV"/>
                         <outlet property="titleLabel" destination="fh8-FM-gxq" id="1t2-t1-8Pi"/>
                     </connections>
                 </tableViewController>
@@ -280,8 +338,13 @@
                         <action selector="takePicture:" destination="t9c-zM-rex" id="g2A-NV-1Yj"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="mdI-gl-C32">
+                    <connections>
+                        <action selector="addLocation:" destination="t9c-zM-rex" id="YFI-fl-hwd"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1849" y="163"/>
+            <point key="canvasLocation" x="2083" y="-505"/>
         </scene>
     </scenes>
     <resources>

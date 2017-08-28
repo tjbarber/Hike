@@ -15,9 +15,16 @@ enum EntryStatus {
     case inserting
 }
 
+enum EntryLocationStatus {
+    case notDetermined
+    case unknown
+    case set
+}
+
 class EntryDetailController: UITableViewController {
     
     var entryStatus: EntryStatus = .inserting
+    var entryLocationStatus: EntryLocationStatus = .notDetermined
     var entryImage: UIImage?
     var entry: Entry?
     
@@ -34,9 +41,14 @@ class EntryDetailController: UITableViewController {
         return imagePicker
     }()
     
+    let locationManager = LocationManager()
+    let geocoder = CLGeocoder()
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UITextField!
     @IBOutlet weak var entryTextField: UITextView!
+    @IBOutlet weak var locationActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var locationLabel: UILabel!
     
     @IBAction func dismissKeyboard(_ sender: Any) {
         tableView.endEditing(true)
@@ -56,6 +68,15 @@ class EntryDetailController: UITableViewController {
         self.present(imagePickerController, animated: true, completion: nil)
     }
     
+    @IBAction func addLocation(_ sender: Any) {
+        if self.entryLocationStatus != .set {
+            self.locationActivityIndicator.startAnimating()
+            self.locationLabel.isUserInteractionEnabled = false
+            self.locationLabel.isHidden = true
+            self.locationManager.requestLocation()
+        }
+    }
+
     @IBAction func save(_ sender: Any) {
         if self.entry == nil {
             self.entry = Entry(context: EntryStore.sharedInstance.viewContext)
@@ -67,6 +88,10 @@ class EntryDetailController: UITableViewController {
         
         entry.name = titleLabel.text
         entry.text = entryTextField.text
+        
+        if self.entryLocationStatus == .set {
+            entry.location = locationLabel.text
+        }
         
         if entry.name == nil && entry.text == nil {
             AlertHelper.showAlert(withMessage: "You must give your entry a title or content!", presentingViewController: self)
@@ -103,15 +128,29 @@ class EntryDetailController: UITableViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         if let entry = self.entry {
+            
             if let imageData = entry.image {
                 self.imageView.image = UIImage(data: imageData as Data)
             }
+            
+            if let location = entry.location {
+                self.entryLocationStatus = .set
+                self.locationLabel.text = location
+            }
+            
             self.titleLabel.text = entry.name
             self.entryTextField.text = entry.text
         }
+        
+        self.locationManager.manager.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 }
 
@@ -150,7 +189,7 @@ extension EntryDetailController: UIImagePickerControllerDelegate {
             self.entryImage = image
         }
         
-        imageView.image = self.entryImage
+        self.imageView.image = self.entryImage
         dismiss(animated: true, completion: nil)
     }
 }
@@ -167,6 +206,60 @@ extension EntryDetailController {
     func insert(_ entry: Entry, completion: @escaping (Error?) -> Void) {
         EntryStore.sharedInstance.insert(entry) { error in
             completion(error)
+        }
+    }
+}
+
+// MARK: - Core Location Manager Delegate and Location Helpers
+extension EntryDetailController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        locationManager.authorizationStatus = status
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        AlertHelper.showAlert(withMessage: error.localizedDescription, presentingViewController: self)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            self.reverse(location: location, withGeocoder: self.geocoder) { placemarkString, locationStatus, error in
+                self.entryLocationStatus = locationStatus
+                
+                if let error = error {
+                    AlertHelper.showAlert(withMessage: error.localizedDescription, presentingViewController: self)
+                    return
+                }
+                
+                if let placemarkString = placemarkString {
+                    self.locationActivityIndicator.stopAnimating()
+                    self.locationLabel.text = placemarkString
+                    self.locationLabel.isHidden = false
+                }
+            }
+        } else {
+            AlertHelper.showAlert(withMessage: "Location services not available.", presentingViewController: self)
+        }
+    }
+    
+    func reverse(location: CLLocation, withGeocoder geocoder: CLGeocoder, completion: @escaping (String?, EntryLocationStatus, Error?) -> Void) {
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            if let error = error {
+                completion(nil, .notDetermined, error)
+            }
+            
+            guard let placemarks = placemarks else {
+                fatalError("No placemarks yet no error")
+            }
+            
+            if let placemark = placemarks.first  {
+                guard let city = placemark.locality, let state = placemark.administrativeArea else {
+                    completion("Location unknown.", .unknown, nil)
+                    return
+                }
+                
+                let placemarkString = "\(city), \(state)"
+                completion(placemarkString, .set, nil)
+            }
         }
     }
 }

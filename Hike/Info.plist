@@ -22,6 +22,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>This app uses the camera to add a photo to your diary entry.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to record where you are for your hike!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app uses the Photo Library to add a photo to your diary entry.</string>
 	<key>UILaunchStoryboardName</key>

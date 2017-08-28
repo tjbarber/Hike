@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AC0EB8C41F4CDE2F003268E5 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0EB8C31F4CDE2F003268E5 /* ImageHelper.swift */; };
 		AC0EB8C81F4E347C003268E5 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0EB8C71F4E347C003268E5 /* UIKitExtensions.swift */; };
+		AC0EB8CA1F549635003268E5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0EB8C91F549635003268E5 /* LocationManager.swift */; };
 		AC2ED1BA1F4B60D600DFA6A6 /* Hike.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1B81F4B60D600DFA6A6 /* Hike.xcdatamodeld */; };
 		AC2ED1BC1F4B60FE00DFA6A6 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1BB1F4B60FE00DFA6A6 /* DataStore.swift */; };
 		AC2ED1C11F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1BF1F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		AC0EB8C31F4CDE2F003268E5 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageHelper.swift; path = Helpers/ImageHelper.swift; sourceTree = "<group>"; };
 		AC0EB8C71F4E347C003268E5 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIKitExtensions.swift; path = Helpers/UIKitExtensions.swift; sourceTree = "<group>"; };
+		AC0EB8C91F549635003268E5 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Helpers/LocationManager.swift; sourceTree = "<group>"; };
 		AC2ED1B91F4B60D600DFA6A6 /* Hike.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hike.xcdatamodel; sourceTree = "<group>"; };
 		AC2ED1BB1F4B60FE00DFA6A6 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		AC2ED1BF1F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Entry+CoreDataClass.swift"; path = "Models/Entry+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				AC2ED1CC1F4BA32B00DFA6A6 /* AlertHelper.swift */,
 				AC0EB8C31F4CDE2F003268E5 /* ImageHelper.swift */,
 				AC0EB8C71F4E347C003268E5 /* UIKitExtensions.swift */,
+				AC0EB8C91F549635003268E5 /* LocationManager.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				AC2ED1BA1F4B60D600DFA6A6 /* Hike.xcdatamodeld in Sources */,
 				AC2ED1CA1F4B849A00DFA6A6 /* EntryDetailController.swift in Sources */,
 				AC0EB8C41F4CDE2F003268E5 /* ImageHelper.swift in Sources */,
+				AC0EB8CA1F549635003268E5 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
