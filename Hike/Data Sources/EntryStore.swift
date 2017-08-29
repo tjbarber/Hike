@@ -12,7 +12,7 @@ import CoreData
 class EntryStore {
     static let sharedInstance = EntryStore()
     let dataStoreContainer = DataStore.sharedInstance.persistantContainer
-    let viewContext = DataStore.sharedInstance.persistantContainer.viewContext
+    var viewContext = DataStore.sharedInstance.persistantContainer.viewContext
     
     func all(completion: @escaping ([Entry]?, Error?) -> Void) {
         let fetchRequest: NSFetchRequest<Entry> = Entry.fetchRequest()
@@ -32,11 +32,14 @@ class EntryStore {
     
     func insert(_ entry: Entry, completion: @escaping (Error?) -> Void) {
         viewContext.perform {
-            if entry.createdAt == nil {
-                entry.createdAt = Date() as NSDate
+            
+            if let createdAt = entry.createdAt {
+                entry.createdAt = createdAt
+            } else {
+                entry.createdAt = NSDate()
             }
             
-            entry.updatedAt = Date() as NSDate
+            entry.updatedAt = NSDate()
             
             do {
                 try self.viewContext.save()
@@ -80,6 +83,38 @@ class EntryStore {
                 DispatchQueue.main.async {
                     completion(e)
                 }
+            }
+        }
+    }
+    
+    func deleteAll(completion: @escaping (Error?) -> Void) {
+        self.all { entries, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+            }
+            
+            guard let entries = entries else {
+                return
+            }
+            
+            let dispatchGroup = DispatchGroup()
+            var deletionError: Error?
+            
+            for entry in entries {
+                dispatchGroup.enter()
+                self.delete(entry) { error in
+                    if let error = error {
+                        deletionError = error
+                    }
+                    
+                    dispatchGroup.leave()
+                }
+            }
+            
+            dispatchGroup.notify(queue: DispatchQueue.main) {
+                completion(deletionError)
             }
         }
     }

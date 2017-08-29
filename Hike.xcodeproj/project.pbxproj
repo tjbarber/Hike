@@ -10,13 +10,14 @@
 		AC0EB8C41F4CDE2F003268E5 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0EB8C31F4CDE2F003268E5 /* ImageHelper.swift */; };
 		AC0EB8C81F4E347C003268E5 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0EB8C71F4E347C003268E5 /* UIKitExtensions.swift */; };
 		AC0EB8CA1F549635003268E5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0EB8C91F549635003268E5 /* LocationManager.swift */; };
+		AC1C97251F55B5A90095EF3F /* HikeFakes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1C97241F55B5A90095EF3F /* HikeFakes.swift */; };
+		AC1C97291F55E2940095EF3F /* Entry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1C97281F55E2940095EF3F /* Entry+CoreDataProperties.swift */; };
 		AC2ED1BA1F4B60D600DFA6A6 /* Hike.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1B81F4B60D600DFA6A6 /* Hike.xcdatamodeld */; };
 		AC2ED1BC1F4B60FE00DFA6A6 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1BB1F4B60FE00DFA6A6 /* DataStore.swift */; };
 		AC2ED1C11F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1BF1F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift */; };
 		AC2ED1C41F4B644900DFA6A6 /* EntryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1C31F4B644900DFA6A6 /* EntryStore.swift */; };
 		AC2ED1CA1F4B849A00DFA6A6 /* EntryDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1C91F4B849A00DFA6A6 /* EntryDetailController.swift */; };
 		AC2ED1CD1F4BA32B00DFA6A6 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1CC1F4BA32B00DFA6A6 /* AlertHelper.swift */; };
-		AC2ED1D11F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2ED1D01F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift */; };
 		AC5F481C1F4C9563005CD9C8 /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5F481B1F4C9563005CD9C8 /* EntryCell.swift */; };
 		ACF955991F4B456700B00F80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF955981F4B456700B00F80 /* AppDelegate.swift */; };
 		ACF9559B1F4B456700B00F80 /* EntriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF9559A1F4B456700B00F80 /* EntriesController.swift */; };
@@ -40,13 +41,14 @@
 		AC0EB8C31F4CDE2F003268E5 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageHelper.swift; path = Helpers/ImageHelper.swift; sourceTree = "<group>"; };
 		AC0EB8C71F4E347C003268E5 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIKitExtensions.swift; path = Helpers/UIKitExtensions.swift; sourceTree = "<group>"; };
 		AC0EB8C91F549635003268E5 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Helpers/LocationManager.swift; sourceTree = "<group>"; };
+		AC1C97241F55B5A90095EF3F /* HikeFakes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HikeFakes.swift; sourceTree = "<group>"; };
+		AC1C97281F55E2940095EF3F /* Entry+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Entry+CoreDataProperties.swift"; path = "Models/Entry+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC2ED1B91F4B60D600DFA6A6 /* Hike.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hike.xcdatamodel; sourceTree = "<group>"; };
 		AC2ED1BB1F4B60FE00DFA6A6 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		AC2ED1BF1F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Entry+CoreDataClass.swift"; path = "Models/Entry+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AC2ED1C31F4B644900DFA6A6 /* EntryStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryStore.swift; path = "Data Sources/EntryStore.swift"; sourceTree = "<group>"; };
 		AC2ED1C91F4B849A00DFA6A6 /* EntryDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryDetailController.swift; path = Controllers/EntryDetailController.swift; sourceTree = "<group>"; };
 		AC2ED1CC1F4BA32B00DFA6A6 /* AlertHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertHelper.swift; path = Helpers/AlertHelper.swift; sourceTree = "<group>"; };
-		AC2ED1D01F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Entry+CoreDataProperties.swift"; path = "Models/Entry+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC5F481B1F4C9563005CD9C8 /* EntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryCell.swift; path = Views/EntryCell.swift; sourceTree = "<group>"; };
 		ACF955951F4B456700B00F80 /* Hike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF955981F4B456700B00F80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				ACF955AD1F4B456700B00F80 /* HikeTests.swift */,
+				AC1C97241F55B5A90095EF3F /* HikeFakes.swift */,
 				ACF955AF1F4B456700B00F80 /* Info.plist */,
 			);
 			path = HikeTests;
@@ -148,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				AC2ED1BF1F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift */,
-				AC2ED1D01F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift */,
+				AC1C97281F55E2940095EF3F /* Entry+CoreDataProperties.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -279,10 +282,10 @@
 				AC0EB8C81F4E347C003268E5 /* UIKitExtensions.swift in Sources */,
 				ACF955991F4B456700B00F80 /* AppDelegate.swift in Sources */,
 				AC2ED1C11F4B63EB00DFA6A6 /* Entry+CoreDataClass.swift in Sources */,
+				AC1C97291F55E2940095EF3F /* Entry+CoreDataProperties.swift in Sources */,
 				AC2ED1C41F4B644900DFA6A6 /* EntryStore.swift in Sources */,
 				AC2ED1CD1F4BA32B00DFA6A6 /* AlertHelper.swift in Sources */,
 				AC5F481C1F4C9563005CD9C8 /* EntryCell.swift in Sources */,
-				AC2ED1D11F4C87DC00DFA6A6 /* Entry+CoreDataProperties.swift in Sources */,
 				AC2ED1BA1F4B60D600DFA6A6 /* Hike.xcdatamodeld in Sources */,
 				AC2ED1CA1F4B849A00DFA6A6 /* EntryDetailController.swift in Sources */,
 				AC0EB8C41F4CDE2F003268E5 /* ImageHelper.swift in Sources */,
@@ -295,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF955AE1F4B456700B00F80 /* HikeTests.swift in Sources */,
+				AC1C97251F55B5A90095EF3F /* HikeFakes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
